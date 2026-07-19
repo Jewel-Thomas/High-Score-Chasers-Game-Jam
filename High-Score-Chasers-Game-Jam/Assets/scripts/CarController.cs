@@ -104,6 +104,12 @@ public class CarController : MonoBehaviour
         wheelRadius = wheelColliders.frontLeftWheelCollider.radius;
         //InstantiateSmoke();
         gearState = GearState.RUNNING;
+        GameInput.Instance.OnReset += GameInput_OnReset;
+    }
+
+    private void GameInput_OnReset(object sender, EventArgs e)
+    {
+        ResetCar();
     }
 
     private void Update()
@@ -127,7 +133,7 @@ public class CarController : MonoBehaviour
 
         if (Mathf.Abs(gasInput) > 0 && isEngineRunning == 0)
         {
-            //StartCoroutine(GetComponent<EngineAudio>().StartEngine());
+            //StartCoroutine(GetComponent<EngineAudio>().StartEngine()); // Not Required for now in this project, may include later
             gearState = GearState.RUNNING;
         }
     }
@@ -174,7 +180,6 @@ public class CarController : MonoBehaviour
     private float CalculateTorque(WheelCollider[] wheelColliders)
     {
         float torque = 0;
-        // TODO : Implement engine running check.
         if (gearState == GearState.RUNNING && clutch > 0)
         {
             if (rPM > increaseGearRPM)
@@ -248,6 +253,14 @@ public class CarController : MonoBehaviour
         wheelColliders.frontRightWheelCollider.brakeTorque = brakeInput * brakePower * 0.7f;
         wheelColliders.rearLeftWheelCollider.brakeTorque = brakeInput * brakePower * 0.3f;
         wheelColliders.rearRightWheelCollider.brakeTorque = brakeInput * brakePower * 0.3f;
+    }
+
+    private void ResetCar()
+    {
+        float groundHeight = MeshHeightChecker.Instance.GetGroundHeight();
+        transform.position = new Vector3(transform.position.x, groundHeight + 2f, transform.position.z);
+        Vector3 currentOrientation = transform.eulerAngles;
+        transform.eulerAngles = new Vector3(currentOrientation.x, currentOrientation.y, 0f);
     }
 
     private void CheckWheelSkid()
