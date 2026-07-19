@@ -3,21 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - wheel
-  - level
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Level
+  - Post Processing
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Vehicles
+  - Vehicle Wheels
+  - Ground Surfaces
+  - Buildings
+  - Obstacles
   - 
   - 
   - 
