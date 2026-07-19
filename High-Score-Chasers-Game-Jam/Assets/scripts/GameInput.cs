@@ -12,6 +12,7 @@ public class GameInput : MonoBehaviour
     private bool isClutchApplied;
 
     public event EventHandler OnMisc;
+    public event EventHandler OnReset;
 
     private enum InputSystemType
     {
@@ -28,11 +29,18 @@ public class GameInput : MonoBehaviour
 
         playerActions.Car.Enable();
         playerActions.Car.Space.performed += Space_performed;
+        playerActions.Car.Reset.performed += Reset_performed;
     }
+
 
     private void Space_performed(InputAction.CallbackContext obj)
     {
         OnMisc?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Reset_performed(InputAction.CallbackContext obj)
+    {
+        OnReset?.Invoke(this, EventArgs.Empty);
     }
 
     private void Update()

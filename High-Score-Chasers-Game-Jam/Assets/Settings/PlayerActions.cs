@@ -117,6 +117,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""07419efd-5cd6-45ab-a68a-29b7a2b2a044"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -266,7 +275,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""e2b9f1d6-19ce-480a-b34a-4fd5a764e21c"",
-                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -277,7 +286,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""1a6652dd-89e0-496c-a909-761ccb854889"",
-                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -328,6 +337,28 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""Space"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0fe8fd66-57c7-4e79-b241-781b8cdffcb1"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ae82faa7-7781-48ec-8a6a-516e55b3ed41"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -339,6 +370,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Car_Move = m_Car.FindAction("Move", throwIfNotFound: true);
         m_Car_Clutch = m_Car.FindAction("Clutch", throwIfNotFound: true);
         m_Car_Space = m_Car.FindAction("Space", throwIfNotFound: true);
+        m_Car_Reset = m_Car.FindAction("Reset", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -422,6 +454,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Car_Move;
     private readonly InputAction m_Car_Clutch;
     private readonly InputAction m_Car_Space;
+    private readonly InputAction m_Car_Reset;
     /// <summary>
     /// Provides access to input actions defined in input action map "Car".
     /// </summary>
@@ -445,6 +478,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Car/Space".
         /// </summary>
         public InputAction @Space => m_Wrapper.m_Car_Space;
+        /// <summary>
+        /// Provides access to the underlying input action "Car/Reset".
+        /// </summary>
+        public InputAction @Reset => m_Wrapper.m_Car_Reset;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -480,6 +517,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Space.started += instance.OnSpace;
             @Space.performed += instance.OnSpace;
             @Space.canceled += instance.OnSpace;
+            @Reset.started += instance.OnReset;
+            @Reset.performed += instance.OnReset;
+            @Reset.canceled += instance.OnReset;
         }
 
         /// <summary>
@@ -500,6 +540,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Space.started -= instance.OnSpace;
             @Space.performed -= instance.OnSpace;
             @Space.canceled -= instance.OnSpace;
+            @Reset.started -= instance.OnReset;
+            @Reset.performed -= instance.OnReset;
+            @Reset.canceled -= instance.OnReset;
         }
 
         /// <summary>
@@ -561,5 +604,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSpace(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Reset" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnReset(InputAction.CallbackContext context);
     }
 }
