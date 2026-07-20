@@ -13,6 +13,8 @@ public class GameInput : MonoBehaviour
 
     public event EventHandler OnMisc;
     public event EventHandler OnReset;
+    public event EventHandler OnHandbrakeStarted;
+    public event EventHandler OnHandbrakeCancelled;
 
     private enum InputSystemType
     {
@@ -30,8 +32,20 @@ public class GameInput : MonoBehaviour
         playerActions.Car.Enable();
         playerActions.Car.Space.performed += Space_performed;
         playerActions.Car.Reset.performed += Reset_performed;
+
+        playerActions.Car.Handbrake.started += Handbrake_started;
+        playerActions.Car.Handbrake.canceled += Handbrake_canceled;
     }
 
+    private void Handbrake_started(InputAction.CallbackContext obj)
+    {
+        OnHandbrakeStarted?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Handbrake_canceled(InputAction.CallbackContext obj)
+    {
+        OnHandbrakeCancelled?.Invoke(this, EventArgs.Empty);
+    }
 
     private void Space_performed(InputAction.CallbackContext obj)
     {

@@ -7,7 +7,9 @@ public class TireDecouple : MonoBehaviour
     [SerializeField] private Transform decoupleTyre;
     [SerializeField] private WheelCollider runningtyreCollider;
     [SerializeField] private MeshRenderer runningTyreMesh;
-    private bool isCoupled = true;
+    private bool isDeCoupled = false;
+
+    [SerializeField] private CarController carController;
 
     private void Start()
     {
@@ -16,8 +18,9 @@ public class TireDecouple : MonoBehaviour
 
     private void GameInput_OnMisc(object sender, System.EventArgs e)
     {
-        Decouple(isCoupled);
-        isCoupled = !isCoupled;
+        if (carController.drivator == Drivator.AI) return;
+        isDeCoupled = !isDeCoupled;
+        Decouple(isDeCoupled);
     }
 
     private void Decouple(bool value)

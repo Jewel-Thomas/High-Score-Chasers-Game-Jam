@@ -3,6 +3,12 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum Drivator
+{
+    Player,
+    AI
+}
+
 public class CarController : MonoBehaviour
 {
 
@@ -20,6 +26,7 @@ public class CarController : MonoBehaviour
     private float gasInput;
     private float steeringInput;
     private float brakeInput;
+    private float handBrakeInput;
     private float speed;
     private float wheelRadius;
 
@@ -74,6 +81,8 @@ public class CarController : MonoBehaviour
     [SerializeField] private float decreaseGearRPM;
     [SerializeField] private float gearChangeTime = 0.5f;
 
+    public Drivator drivator;
+
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody>();
@@ -105,6 +114,8 @@ public class CarController : MonoBehaviour
         //InstantiateSmoke();
         gearState = GearState.RUNNING;
         GameInput.Instance.OnReset += GameInput_OnReset;
+        GameInput.Instance.OnHandbrakeStarted += GameInput_OnHandbrakeStarted;
+        GameInput.Instance.OnHandbrakeCancelled += GameInput_OnHandbrakeCancelled;
     }
 
     private void GameInput_OnReset(object sender, EventArgs e)
@@ -112,10 +123,20 @@ public class CarController : MonoBehaviour
         ResetCar();
     }
 
-    private void Update()
+    private void GameInput_OnHandbrakeStarted(object sender, EventArgs e)
+    {
+        HandBrake(true);
+    }
+
+    private void GameInput_OnHandbrakeCancelled(object sender, EventArgs e)
+    {
+        HandBrake(false);
+    }
+
+    private void FixedUpdate()
     {
         speed = playerRb.velocity.magnitude;
-        GetInput();
+        if (drivator == Drivator.Player) GetInput();
         isReversing = IsReversing();
         GetClutchValue();
         //rpmGuage.UpdateGuageVisual(rPM, maxRPM, currentGear);
@@ -126,10 +147,19 @@ public class CarController : MonoBehaviour
         UpdateAllWheels();
     }
 
-    private void GetInput()
+    public void GetInput(float _gasInput = 0f, float _steeringInput = 0f)
     {
-        gasInput = GameInput.Instance.CarMovementInputNormalized().y;
-        steeringInput = GameInput.Instance.CarMovementInputNormalized().x;
+        switch(drivator)
+        {
+            case Drivator.Player:
+                gasInput = GameInput.Instance.CarMovementInputNormalized().y;
+                steeringInput = GameInput.Instance.CarMovementInputNormalized().x;
+                break;
+            case Drivator.AI:
+                gasInput = _gasInput;
+                steeringInput = _steeringInput;
+                break;
+        }
 
         if (Mathf.Abs(gasInput) > 0 && isEngineRunning == 0)
         {
@@ -249,14 +279,23 @@ public class CarController : MonoBehaviour
 
     private void Brake()
     {
-        wheelColliders.frontLeftWheelCollider.brakeTorque = brakeInput * brakePower * 0.7f;
-        wheelColliders.frontRightWheelCollider.brakeTorque = brakeInput * brakePower * 0.7f;
-        wheelColliders.rearLeftWheelCollider.brakeTorque = brakeInput * brakePower * 0.3f;
-        wheelColliders.rearRightWheelCollider.brakeTorque = brakeInput * brakePower * 0.3f;
+        float finalFrontBrake = Mathf.Max(brakeInput, handBrakeInput) * brakePower * 0.7f;
+        float finalRearBrake = Mathf.Max(brakeInput, handBrakeInput) * brakePower * 0.3f;
+
+        wheelColliders.frontLeftWheelCollider.brakeTorque = finalFrontBrake;
+        wheelColliders.frontRightWheelCollider.brakeTorque = finalFrontBrake;
+        wheelColliders.rearLeftWheelCollider.brakeTorque = finalRearBrake;
+        wheelColliders.rearRightWheelCollider.brakeTorque = finalRearBrake;
+    }
+
+    public void HandBrake(bool isApplied)
+    {
+        handBrakeInput = isApplied ? 1 : 0;
     }
 
     private void ResetCar()
     {
+        if (drivator == Drivator.AI) return;
         float groundHeight = MeshHeightChecker.Instance.GetGroundHeight();
         transform.position = new Vector3(transform.position.x, groundHeight + 2f, transform.position.z);
         Vector3 currentOrientation = transform.eulerAngles;
