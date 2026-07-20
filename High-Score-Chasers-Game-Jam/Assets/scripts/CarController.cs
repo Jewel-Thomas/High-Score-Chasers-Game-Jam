@@ -105,6 +105,9 @@ public class CarController : MonoBehaviour
         //InstantiateSmoke();
         gearState = GearState.RUNNING;
         GameInput.Instance.OnReset += GameInput_OnReset;
+
+        // Explicitly define your optimized physics balance point
+        //playerRb.centerOfMass = new Vector3(0f, 60000f, 0f);
     }
 
     private void GameInput_OnReset(object sender, EventArgs e)
@@ -112,7 +115,7 @@ public class CarController : MonoBehaviour
         ResetCar();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         speed = playerRb.velocity.magnitude;
         GetInput();
