@@ -177,6 +177,7 @@ MonoBehaviour:
   increaseGearRPM: 5500
   decreaseGearRPM: 3300
   gearChangeTime: 0.5
+  drivator: 0
 --- !u!114 &2712202567478935349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +249,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 1
-    m_Stiffness: 1.5
+    m_Stiffness: 2
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
@@ -327,8 +328,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4539016015776241205, guid: 4854a8c6334de5b428be2ed4e4c8e5c4, type: 3}
-  - {fileID: -8978598749037407868, guid: 4854a8c6334de5b428be2ed4e4c8e5c4, type: 3}
+  - {fileID: 2100000, guid: 662dec0993c07421fa98ee6d15c405da, type: 2}
+  - {fileID: 2100000, guid: 7c5f0c86fd112492ca88dfbb1c99e7d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -570,6 +571,7 @@ MonoBehaviour:
   decoupleTyre: {fileID: 5174693088864049459}
   runningtyreCollider: {fileID: 5644811150909183670}
   runningTyreMesh: {fileID: 8824592494224334344}
+  carController: {fileID: 7784514489067030300}
 --- !u!1 &3236835702161813069
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,7 +634,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c7a62be14b4d3462e9cc48ae46fc1358, type: 2}
+  - {fileID: 2100000, guid: a5c9eb83eec0c44398515059286b4a40, type: 2}
   - {fileID: 2100000, guid: f8d785b47790c4538acb81e426b1d487, type: 2}
   - {fileID: 2100000, guid: 5c0ba7a92a65c4ded9a4e588f0aa1837, type: 2}
   - {fileID: 2100000, guid: 03b657adededc4deca01bd1493f92ff0, type: 2}
@@ -771,13 +773,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 1
-    m_Stiffness: 1.5
+    m_Stiffness: 2
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1
-    m_Stiffness: 1.5
+    m_Stiffness: 1
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -888,6 +890,7 @@ MonoBehaviour:
   decoupleTyre: {fileID: 8532112049270353683}
   runningtyreCollider: {fileID: 6931532777031952847}
   runningTyreMesh: {fileID: 4330847113311309607}
+  carController: {fileID: 7784514489067030300}
 --- !u!1 &4718924470518517354
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,6 +992,7 @@ MonoBehaviour:
   decoupleTyre: {fileID: 108818009055080209}
   runningtyreCollider: {fileID: 9063703963984125958}
   runningTyreMesh: {fileID: 2050461753283840405}
+  carController: {fileID: 7784514489067030300}
 --- !u!1 &4927193446712610797
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,8 +1056,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4539016015776241205, guid: 4854a8c6334de5b428be2ed4e4c8e5c4, type: 3}
-  - {fileID: -8978598749037407868, guid: 4854a8c6334de5b428be2ed4e4c8e5c4, type: 3}
+  - {fileID: 2100000, guid: 662dec0993c07421fa98ee6d15c405da, type: 2}
+  - {fileID: 2100000, guid: 7c5f0c86fd112492ca88dfbb1c99e7d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1187,8 +1191,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4539016015776241205, guid: 4854a8c6334de5b428be2ed4e4c8e5c4, type: 3}
-  - {fileID: -8978598749037407868, guid: 4854a8c6334de5b428be2ed4e4c8e5c4, type: 3}
+  - {fileID: 2100000, guid: 662dec0993c07421fa98ee6d15c405da, type: 2}
+  - {fileID: 2100000, guid: 7c5f0c86fd112492ca88dfbb1c99e7d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1360,6 +1364,7 @@ MonoBehaviour:
   decoupleTyre: {fileID: 2210277303712718804}
   runningtyreCollider: {fileID: 291685970939164699}
   runningTyreMesh: {fileID: 2613542820073449319}
+  carController: {fileID: 7784514489067030300}
 --- !u!1 &5817617745504641731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,8 +1428,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4539016015776241205, guid: 4854a8c6334de5b428be2ed4e4c8e5c4, type: 3}
-  - {fileID: -8978598749037407868, guid: 4854a8c6334de5b428be2ed4e4c8e5c4, type: 3}
+  - {fileID: 2100000, guid: 662dec0993c07421fa98ee6d15c405da, type: 2}
+  - {fileID: 2100000, guid: 7c5f0c86fd112492ca88dfbb1c99e7d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1550,13 +1555,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 1
-    m_Stiffness: 1.5
+    m_Stiffness: 2
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1
-    m_Stiffness: 1.5
+    m_Stiffness: 1
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1621,7 +1626,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 1
-    m_Stiffness: 1.5
+    m_Stiffness: 2
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
