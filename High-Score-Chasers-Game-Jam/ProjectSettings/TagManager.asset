@@ -6,6 +6,7 @@ TagManager:
   tags:
   - wheel
   - level
+  - Enemy
   layers:
   - Default
   - TransparentFX

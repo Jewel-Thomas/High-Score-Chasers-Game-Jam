@@ -165,7 +165,7 @@ public class CarController : MonoBehaviour
         if (Mathf.Abs(gasInput) > 0 && isEngineRunning == 0)
         {
             Debug.Log("Engine Started!");
-            StartCoroutine(GetComponent<EngineAudio>().StartEngine()); // Not Required for now in this project, may include later
+            StartCoroutine(GetComponent<EngineAudio>().StartEngine());
             gearState = GearState.RUNNING;
         }
     }
