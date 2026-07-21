@@ -70,11 +70,11 @@ public class EngineAudio : MonoBehaviour
     public IEnumerator StartEngine()
     {
         isEngineRunning = true;
-        yield return null;
-        //startingSound.Play();
-        //carController.isEngineRunning = 1;
-        //yield return new WaitForSeconds(0.6f);
-        //yield return new WaitForSeconds(0.4f);
-        //carController.isEngineRunning = 2;
+        //yield return null;
+        startingSound.Play();
+        carController.isEngineRunning = 1;
+        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.4f);
+        carController.isEngineRunning = 2;
     }
 }
