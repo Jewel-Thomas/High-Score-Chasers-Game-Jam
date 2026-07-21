@@ -85,6 +85,7 @@ public class CarController : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 144;
         playerRb = GetComponent<Rigidbody>();
 
         rearWheels = new WheelCollider[]
@@ -163,7 +164,8 @@ public class CarController : MonoBehaviour
 
         if (Mathf.Abs(gasInput) > 0 && isEngineRunning == 0)
         {
-            //StartCoroutine(GetComponent<EngineAudio>().StartEngine()); // Not Required for now in this project, may include later
+            Debug.Log("Engine Started!");
+            StartCoroutine(GetComponent<EngineAudio>().StartEngine());
             gearState = GearState.RUNNING;
         }
     }
