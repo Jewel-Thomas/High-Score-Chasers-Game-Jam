@@ -441,16 +441,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 510008016166384458, guid: 15ddfb7a31aefdc4aa9772613cff2ae3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1489103681}
-    - targetCorrespondingSourceObject: {fileID: 510008016166384458, guid: 15ddfb7a31aefdc4aa9772613cff2ae3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1489103680}
-    - targetCorrespondingSourceObject: {fileID: 510008016166384458, guid: 15ddfb7a31aefdc4aa9772613cff2ae3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1489103679}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15ddfb7a31aefdc4aa9772613cff2ae3, type: 3}
 --- !u!82 &88536391 stripped
 AudioSource:
@@ -2850,6 +2841,10 @@ PrefabInstance:
       value: Enemy Car (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6677101821052096189, guid: d7537783fd7fb4979a4fa13d5d810701, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6677101821052096189, guid: d7537783fd7fb4979a4fa13d5d810701, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -2909,6 +2904,10 @@ PrefabInstance:
     - target: {fileID: 6677101821052096189, guid: d7537783fd7fb4979a4fa13d5d810701, type: 3}
       propertyPath: m_Name
       value: Enemy Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 6677101821052096189, guid: d7537783fd7fb4979a4fa13d5d810701, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6677101821052096189, guid: d7537783fd7fb4979a4fa13d5d810701, type: 3}
       propertyPath: m_TagString
@@ -3098,6 +3097,10 @@ PrefabInstance:
     - target: {fileID: 6677101821052096189, guid: d7537783fd7fb4979a4fa13d5d810701, type: 3}
       propertyPath: m_Name
       value: Enemy Car (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6677101821052096189, guid: d7537783fd7fb4979a4fa13d5d810701, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6677101821052096189, guid: d7537783fd7fb4979a4fa13d5d810701, type: 3}
       propertyPath: m_TagString
@@ -14110,4 +14113,4 @@ SceneRoots:
   - {fileID: 732173837}
   - {fileID: 794205699}
   - {fileID: 1211520838}
-  - {fileID: 1297014708}
+  - {fileID: 70625439}
