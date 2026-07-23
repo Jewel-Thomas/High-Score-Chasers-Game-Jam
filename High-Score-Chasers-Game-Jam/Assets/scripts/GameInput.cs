@@ -90,15 +90,4 @@ public class GameInput : MonoBehaviour
                 return inputVector;
         }
     }
-
-    private void OnDestroy()
-    {
-        playerActions.Car.Space.performed -= Space_performed;
-        playerActions.Car.Reset.performed -= Reset_performed;
-
-        playerActions.Car.Handbrake.started -= Handbrake_started;
-        playerActions.Car.Handbrake.canceled -= Handbrake_canceled;
-
-        playerActions.Car.Disable();
-    }
 }

@@ -28,10 +28,15 @@ public class EnemyTEST : MonoBehaviour
 
     [SerializeField] private Transform player;
     [SerializeField] private Animator animator;
-
+    
     private NavMeshAgent agent;
 
     [SerializeField] private RagDollController R1;
+
+    [SerializeField] float fireRate = 1.5f;
+
+    private float nextFireTime;
+    [SerializeField] private CowboyGun Gun;
 
     [Header("Ranges")]
 
@@ -46,6 +51,11 @@ public class EnemyTEST : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
     
+    void Start()
+    {
+        //agent.updateRotation = false;
+    }
+
     void RunStateMachine()
     {
         float distance = Vector3.Distance(transform.position, player.position);
@@ -140,16 +150,32 @@ public class EnemyTEST : MonoBehaviour
 
     //Collision with player
 
+    private void Death()
+    {
+        if (AICoroutine != null)
+        {
+            StopCoroutine(AICoroutine);
+            AICoroutine = null;
+        }
+
+        agent.enabled = false;
+       
+
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player") && R1.CheckAnimator())
         {
+            Vector3 impactV = collision.relativeVelocity;
+            //Debug.Log("Impact Speed: " + impactSpeed);
+
             ScoreManager.Instance.AddScore(
                 scoreValue,
                 ScoreType.EnemyHit
             );
-
-            R1.EnableRagdoll();
+            Death();
+            R1.EnableRagdoll(impactV);
             //Debug.Log("Collison successfully detected");
 
 
@@ -161,6 +187,10 @@ public class EnemyTEST : MonoBehaviour
 
     void IdleState(float distance)
     {
+        if (!agent.enabled)
+        {
+            return;
+        }
         agent.isStopped = true;
 
         if (distance <= detectionRange)
@@ -171,6 +201,11 @@ public class EnemyTEST : MonoBehaviour
 
     void ChaseState(float distance)
     {
+        if (!agent.enabled)
+        {
+            return;
+        }
+
         agent.isStopped = false;
         agent.SetDestination(player.position);
 
@@ -194,6 +229,10 @@ public class EnemyTEST : MonoBehaviour
 
     void ShootState(float distance)
     {
+        if (!agent.enabled)
+        {
+            return;
+        }
         agent.isStopped = true;
 
         // Face the player
@@ -205,10 +244,13 @@ public class EnemyTEST : MonoBehaviour
             Quaternion.LookRotation(lookPos),
             Time.deltaTime * 6f);
 
-        //*****
-        // Shooting code coming soon
+        if (Time.time >= nextFireTime)
+        {
+            Debug.Log("Gun Fired");
+            Gun.Fire(player.position);
 
-        //***
+            nextFireTime = Time.time + fireRate;
+        }
 
         if (distance <= retreatRange)
         {
@@ -231,6 +273,11 @@ public class EnemyTEST : MonoBehaviour
 
     void RetreatState(float distance)
     {
+        if (!agent.enabled)
+        {
+            return;
+        }
+
         agent.isStopped = false;
 
         Vector3 direction = (transform.position - player.position).normalized;
@@ -259,7 +306,7 @@ public class EnemyTEST : MonoBehaviour
 
         CurrentState = newState;
         UpdateAnimation(CurrentState);
-        Debug.Log("State Changed To: " + CurrentState);
+        //Debug.Log("State Changed To: " + CurrentState);
     }
 
 }

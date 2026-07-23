@@ -16,32 +16,19 @@ public class MeshHeightChecker : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public float GetGroundHeight()
     {
-        Vector3 rayStartPosition = new Vector3(transform.position.x, transform.position.y + 50f, transform.position.z);
+        Vector3 rayStartPosition = transform.position + Vector3.up * 0.5f;
 
-        if (Physics.Raycast(rayStartPosition, Vector3.down, out RaycastHit hit, raycastDistance, groundLayer))
+        if(Physics.Raycast(rayStartPosition, Vector3.down, out RaycastHit hit, raycastDistance, groundLayer))
         {
             float groundHeight = hit.point.y;
             return groundHeight;
         }
 
         return 0f;
-    }
-
-    public Vector3 PositionObjectsToGround(Vector3 rayStartPos)
-    {
-        Vector3 highStart = new Vector3(rayStartPos.x, rayStartPos.y + 50f, rayStartPos.z);
-
-        if (Physics.Raycast(highStart, Vector3.down, out RaycastHit hit, Mathf.Infinity, groundLayer))
-        {
-            return new Vector3(rayStartPos.x, hit.point.y, rayStartPos.z);
-        }
-
-        return rayStartPos;
     }
 
 }
