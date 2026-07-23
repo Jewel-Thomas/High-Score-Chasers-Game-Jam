@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using TMPro;
 using Random = UnityEngine.Random;
 
 public enum Drivator
@@ -13,6 +14,7 @@ public class CarController : MonoBehaviour
 {
 
     private Rigidbody playerRb;
+    [SerializeField] private TextMeshProUGUI speedText;
 
     [SerializeField] private WheelColliders wheelColliders;
     [SerializeField] private WheelMeshes wheelMeshes;
@@ -137,6 +139,7 @@ public class CarController : MonoBehaviour
     private void FixedUpdate()
     {
         speed = playerRb.velocity.magnitude;
+        speedText.text = "Speed: " + Mathf.RoundToInt(speed).ToString() + " m/s";
         if (drivator == Drivator.Player) GetInput();
         isReversing = IsReversing();
         GetClutchValue();
