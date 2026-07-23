@@ -33,6 +33,11 @@ public class EnemyTEST : MonoBehaviour
 
     [SerializeField] private RagDollController R1;
 
+    [SerializeField] float fireRate = 1.5f;
+
+    private float nextFireTime;
+    [SerializeField] private CowboyGun Gun;
+
     [Header("Ranges")]
 
     [SerializeField] private float detectionRange = 25f;
@@ -46,6 +51,11 @@ public class EnemyTEST : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
     
+    void Start()
+    {
+        //agent.updateRotation = false;
+    }
+
     void RunStateMachine()
     {
         float distance = Vector3.Distance(transform.position, player.position);
@@ -144,12 +154,15 @@ public class EnemyTEST : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player") && R1.CheckAnimator())
         {
+            Vector3 impactV = collision.relativeVelocity;
+            //Debug.Log("Impact Speed: " + impactSpeed);
+
             ScoreManager.Instance.AddScore(
                 scoreValue,
                 ScoreType.EnemyHit
             );
 
-            R1.EnableRagdoll();
+            R1.EnableRagdoll(impactV);
             //Debug.Log("Collison successfully detected");
 
 
@@ -205,10 +218,13 @@ public class EnemyTEST : MonoBehaviour
             Quaternion.LookRotation(lookPos),
             Time.deltaTime * 6f);
 
-        //*****
-        // Shooting code coming soon
+        if (Time.time >= nextFireTime)
+        {
+            Debug.Log("Gun Fired");
+            Gun.Fire(player.position);
 
-        //***
+            nextFireTime = Time.time + fireRate;
+        }
 
         if (distance <= retreatRange)
         {
@@ -259,7 +275,7 @@ public class EnemyTEST : MonoBehaviour
 
         CurrentState = newState;
         UpdateAnimation(CurrentState);
-        Debug.Log("State Changed To: " + CurrentState);
+        //Debug.Log("State Changed To: " + CurrentState);
     }
 
 }
