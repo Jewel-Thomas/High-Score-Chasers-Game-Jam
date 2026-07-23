@@ -1,14 +1,14 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(MovableGizmoDemo))]
+[CustomEditor(typeof(SpawnArea))]
 public class MovableGizmoEditor : Editor
 {
     private LayerMask GroundMask => LayerMask.GetMask("Ground");
 
     private void OnSceneGUI()
     {
-        MovableGizmoDemo demo = (MovableGizmoDemo)target;
+        SpawnArea demo = (SpawnArea)target;
         Event currentEvent = Event.current;
 
         bool isModifierDown = currentEvent.control || currentEvent.command;
