@@ -28,7 +28,7 @@ public class EnemyTEST : MonoBehaviour
 
     [SerializeField] private Transform player;
     [SerializeField] private Animator animator;
-    
+
     private NavMeshAgent agent;
 
     [SerializeField] private RagDollController R1;
@@ -150,19 +150,6 @@ public class EnemyTEST : MonoBehaviour
 
     //Collision with player
 
-    private void Death()
-    {
-        if (AICoroutine != null)
-        {
-            StopCoroutine(AICoroutine);
-            AICoroutine = null;
-        }
-
-        agent.enabled = false;
-       
-
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player") && R1.CheckAnimator())
@@ -174,7 +161,7 @@ public class EnemyTEST : MonoBehaviour
                 scoreValue,
                 ScoreType.EnemyHit
             );
-            Death();
+
             R1.EnableRagdoll(impactV);
             //Debug.Log("Collison successfully detected");
 
@@ -187,10 +174,6 @@ public class EnemyTEST : MonoBehaviour
 
     void IdleState(float distance)
     {
-        if (!agent.enabled)
-        {
-            return;
-        }
         agent.isStopped = true;
 
         if (distance <= detectionRange)
@@ -201,11 +184,6 @@ public class EnemyTEST : MonoBehaviour
 
     void ChaseState(float distance)
     {
-        if (!agent.enabled)
-        {
-            return;
-        }
-
         agent.isStopped = false;
         agent.SetDestination(player.position);
 
@@ -229,10 +207,6 @@ public class EnemyTEST : MonoBehaviour
 
     void ShootState(float distance)
     {
-        if (!agent.enabled)
-        {
-            return;
-        }
         agent.isStopped = true;
 
         // Face the player
@@ -273,11 +247,6 @@ public class EnemyTEST : MonoBehaviour
 
     void RetreatState(float distance)
     {
-        if (!agent.enabled)
-        {
-            return;
-        }
-
         agent.isStopped = false;
 
         Vector3 direction = (transform.position - player.position).normalized;
