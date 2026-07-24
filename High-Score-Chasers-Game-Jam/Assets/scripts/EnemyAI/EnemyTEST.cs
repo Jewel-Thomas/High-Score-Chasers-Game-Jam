@@ -118,7 +118,7 @@ public class EnemyTEST : MonoBehaviour
             "AnimationState",
             (int)animState
         );
-        Debug.Log("Animation has been updated to :" + animState);
+        //Debug.Log("Animation has been updated to :" + animState);
     }
 
     IEnumerator AIThink()
@@ -249,7 +249,7 @@ public class EnemyTEST : MonoBehaviour
 
         if (Time.time >= nextFireTime)
         {
-            Debug.Log("Gun Fired");
+            //Debug.Log("Gun Fired");
             Gun.Fire(player.position);
 
             nextFireTime = Time.time + fireRate;
