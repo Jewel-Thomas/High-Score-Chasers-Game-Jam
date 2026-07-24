@@ -139,7 +139,7 @@ public class CarController : MonoBehaviour
     private void FixedUpdate()
     {
         speed = playerRb.velocity.magnitude;
-        speedText.text = "Speed: " + Mathf.RoundToInt(speed).ToString() + " m/s";
+        if (speedText != null) speedText.text = "Speed: " + Mathf.RoundToInt(speed).ToString() + " m/s";
         if (drivator == Drivator.Player) GetInput();
         isReversing = IsReversing();
         GetClutchValue();
