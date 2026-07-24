@@ -3,7 +3,7 @@
     {
         AirTime,
         Waypoint,
-        DestroyObject,
+        CollectPower,
         TimeBonus,
         EnemyHit,
         SpeedTicket
