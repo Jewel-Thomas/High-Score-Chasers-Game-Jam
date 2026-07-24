@@ -52,7 +52,7 @@ public class RagDollController : MonoBehaviour
         Vector3 direction = impactVelocity.normalized;
         direction.y += 0.25f;
         direction.Normalize();
-        //hipsRb.AddForce(direction * force, ForceMode.Impulse);
+        hipsRb.AddForce(direction * force, ForceMode.Impulse);
     }
 
     public void DisableRagdoll()
