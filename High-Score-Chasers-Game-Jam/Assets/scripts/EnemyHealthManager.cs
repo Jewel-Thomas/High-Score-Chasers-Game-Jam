@@ -38,5 +38,7 @@ public class EnemyHealthManager : MonoBehaviour
             tire.Decouple(true);
             Destroy(tire.GetDecoupleTire(), 10f);
         }
+
+        Destroy(gameObject, 15);
     }
 }

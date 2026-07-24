@@ -1558,6 +1558,7 @@ GameObject:
   - component: {fileID: 8297099790771358284}
   - component: {fileID: 2509732764405521174}
   - component: {fileID: 5530214852549073738}
+  - component: {fileID: 1987137803786176696}
   m_Layer: 0
   m_Name: Enemy Car
   m_TagString: Enemy
@@ -1623,6 +1624,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedText: {fileID: 0}
+  CollisionDamageThreshold: 20
+  CollisionDamageMultiplier: 2
   wheelColliders:
     frontLeftWheelCollider: {fileID: 7235623644707238284}
     frontRightWheelCollider: {fileID: 7183858962052853581}
@@ -1780,6 +1783,24 @@ MonoBehaviour:
   LimiterEngage: 0.8
   isEngineRunning: 0
   startingSound: {fileID: 9156233009634759058}
+--- !u!114 &1987137803786176696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6677101821052096189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e1a817f9555c4fb9936a6d5f2dee115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  decoupleTireObjects:
+  - {fileID: 5848211972503344797}
+  - {fileID: 6811257159095369495}
+  - {fileID: 4902587395549484863}
+  - {fileID: 759291170674099196}
 --- !u!1 &7098294060941380740
 GameObject:
   m_ObjectHideFlags: 0
