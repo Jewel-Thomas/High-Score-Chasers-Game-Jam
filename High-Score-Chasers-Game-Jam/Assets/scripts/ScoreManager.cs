@@ -17,7 +17,6 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
-        TargetText.text = $"Target: {requiredScore}";
         if (Instance == null)
         {
             Instance = this;
