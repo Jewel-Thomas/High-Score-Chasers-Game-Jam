@@ -1,30 +1,39 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealthManager : MonoBehaviour
 {
-    [SerializeField] private float health = 100;
+    [SerializeField] private float maxHealth = 100;
     [SerializeField] private TireDecouple[] decoupleTireObjects;
+    [SerializeField] private Slider healthBar;
+
+    private float currentHealth;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+        healthBar.maxValue = maxHealth;
+    }
 
     public float GetHealth()
     {
-        return health;
+        return currentHealth;
     }
 
-    public void SetHealth(float _health)
+    public void SetHealth(float health)
     {
-        health = _health;
+        currentHealth = health;
     }
 
     public void TakeDamage(float relativeSpeed)
     {
-        if (health < 0) return;
+        if (currentHealth < 0) return;
         float damage = Mathf.Abs(relativeSpeed);
 
-        health -= damage;
+        currentHealth -= damage;
+        healthBar.value = currentHealth;
 
-        Debug.Log("Enemy Health : " + health);
-
-        if (health < 0)
+        if (currentHealth < 0)
         {
             // Car totaled logic
             TotallCar();
