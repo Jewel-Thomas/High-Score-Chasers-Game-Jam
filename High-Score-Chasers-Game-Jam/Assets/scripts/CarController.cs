@@ -301,8 +301,8 @@ public class CarController : MonoBehaviour
     private void ResetCar()
     {
         if (drivator == Drivator.AI) return;
-        float groundHeight = MeshHeightChecker.Instance.GetGroundHeight();
-        transform.position = new Vector3(transform.position.x, groundHeight + 2f, transform.position.z);
+        float groundHeight = MeshHeightChecker.Instance.GetGroundHeight(transform.position);
+        transform.position = new Vector3(transform.position.x - 1, groundHeight + 2f, transform.position.z + 1);
         Vector3 currentOrientation = transform.eulerAngles;
         transform.eulerAngles = new Vector3(currentOrientation.x, currentOrientation.y, 0f);
     }

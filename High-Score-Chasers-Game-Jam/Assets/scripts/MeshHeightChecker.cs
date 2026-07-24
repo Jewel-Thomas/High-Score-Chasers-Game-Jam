@@ -5,8 +5,6 @@ public class MeshHeightChecker : MonoBehaviour
     public static MeshHeightChecker Instance;
 
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float raycastDistance = 20f;
-
     private void Awake()
     {
         if(Instance && Instance != this)
@@ -19,11 +17,11 @@ public class MeshHeightChecker : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public float GetGroundHeight()
+    public float GetGroundHeight(Vector3 rayStartPos)
     {
-        Vector3 rayStartPosition = new Vector3(transform.position.x, transform.position.y + 50f, transform.position.z);
+        Vector3 rayStartPosition = new Vector3(rayStartPos.x, rayStartPos.y + 50f, rayStartPos.z);
 
-        if (Physics.Raycast(rayStartPosition, Vector3.down, out RaycastHit hit, raycastDistance, groundLayer))
+        if (Physics.Raycast(rayStartPosition, Vector3.down, out RaycastHit hit, Mathf.Infinity, groundLayer))
         {
             float groundHeight = hit.point.y;
             return groundHeight;
