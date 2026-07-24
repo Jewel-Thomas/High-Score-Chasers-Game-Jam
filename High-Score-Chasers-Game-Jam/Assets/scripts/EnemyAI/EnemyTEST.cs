@@ -29,7 +29,7 @@ public class EnemyTEST : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Animator animator;
     
-    private NavMeshAgent agent;
+    [SerializeField] private NavMeshAgent agent;
 
     [SerializeField] private RagDollController R1;
 
@@ -48,7 +48,18 @@ public class EnemyTEST : MonoBehaviour
 
     private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
+        //agent = GetComponent<NavMeshAgent>();
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        if(playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+        else
+        {
+            Debug.LogError("Player not found!");
+        }
+
     }
     
     void Start()
@@ -120,34 +131,25 @@ public class EnemyTEST : MonoBehaviour
         }
     }
     
-    // Player Entering detection range
-
-    void OnTriggerEnter(Collider other)
+    public void PlayerDetected()
     {
-        if(!other.CompareTag("Player"))
-        {
-            return;
-        }
-        else if(AICoroutine == null)
+        if(AICoroutine == null)
         {
             AICoroutine = StartCoroutine(AIThink());
         }
     }
-    // Player Leaves detection range
-    void OnTriggerExit(Collider other)
+
+
+    public void PlayerLost()
     {
-        if(!other.CompareTag("Player"))
-        {
-            return;
-        }
-        else if(AICoroutine != null)
+        if(AICoroutine != null)
         {
             StopCoroutine(AICoroutine);
             AICoroutine = null;
         }
+
         ChangeState(EnemyState.Idle);
     }
-
     //Collision with player
 
     private void Death()
@@ -163,11 +165,11 @@ public class EnemyTEST : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.CompareTag("Player") && R1.CheckAnimator())
         {
-            Vector3 impactV = collision.relativeVelocity;
+            Vector3 impactV = Vector3.zero;
             //Debug.Log("Impact Speed: " + impactSpeed);
 
             ScoreManager.Instance.AddScore(
@@ -179,7 +181,7 @@ public class EnemyTEST : MonoBehaviour
             //Debug.Log("Collison successfully detected");
 
 
-            Destroy(gameObject,5f);
+            Destroy(transform.parent.gameObject,5f);
         }
     }
 
@@ -187,10 +189,11 @@ public class EnemyTEST : MonoBehaviour
 
     void IdleState(float distance)
     {
-        if (!agent.enabled)
+        if (!agent.enabled || !agent.isOnNavMesh)
         {
             return;
         }
+        
         agent.isStopped = true;
 
         if (distance <= detectionRange)
@@ -201,7 +204,7 @@ public class EnemyTEST : MonoBehaviour
 
     void ChaseState(float distance)
     {
-        if (!agent.enabled)
+        if (!agent.enabled || !agent.isOnNavMesh)
         {
             return;
         }
@@ -229,7 +232,7 @@ public class EnemyTEST : MonoBehaviour
 
     void ShootState(float distance)
     {
-        if (!agent.enabled)
+        if (!agent.enabled || !agent.isOnNavMesh)
         {
             return;
         }
@@ -273,11 +276,10 @@ public class EnemyTEST : MonoBehaviour
 
     void RetreatState(float distance)
     {
-        if (!agent.enabled)
+        if (!agent.enabled || !agent.isOnNavMesh)
         {
             return;
         }
-
         agent.isStopped = false;
 
         Vector3 direction = (transform.position - player.position).normalized;

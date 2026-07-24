@@ -34,6 +34,9 @@ public class ScoreManager : MonoBehaviour
 
             case ScoreType.EnemyHit:
                 return "TakeDown";
+                
+            case ScoreType.CollectPower:
+                return "Power Cell Collected";
 
             default:
                 return "???";
