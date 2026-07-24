@@ -8,7 +8,8 @@ public class ScoreManager : MonoBehaviour
 {
     //This handles scores that are then passed on to the UI manager
     public static ScoreManager Instance;
-
+    [SerializeField] private int requiredScore = 500;
+    [SerializeField] private TMP_Text TargetText;
     public int TotalScore { get; private set; }
 
     private List<ScoreEvent> recentEvents = new List<ScoreEvent>();
@@ -16,6 +17,7 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        TargetText.text = $"Target Score: {requiredScore}";
         
     }
 
@@ -53,6 +55,10 @@ public class ScoreManager : MonoBehaviour
         UIManager.Instance.UpdateScore(TotalScore);
         UIManager.Instance.AddScoreFeed(newEvent);
         Debug.Log("score added");
+        if(TotalScore >= requiredScore)
+        {
+            Debug.Log("Level Complete!");
+        }
     }
 
 
