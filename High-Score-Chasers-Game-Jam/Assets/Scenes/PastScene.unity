@@ -1558,25 +1558,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &267929236 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 187622790284522476, guid: 57ad314a4f40b4c3b8ee45caecd080cd, type: 3}
-  m_PrefabInstance: {fileID: 1516185948}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &267929241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 267929236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 341f994c553b5724485ad5ff5cfe6838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  HealthBar: {fileID: 772334773}
 --- !u!82 &275757000 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 9156233009634759058, guid: d7537783fd7fb4979a4fa13d5d810701, type: 3}
@@ -8710,7 +8691,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  raycastDistance: 20
 --- !u!4 &1291779757
 Transform:
   m_ObjectHideFlags: 0
@@ -9622,13 +9602,11 @@ PrefabInstance:
       propertyPath: speedText
       value: 
       objectReference: {fileID: 395922569}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2712202567478935349, guid: 57ad314a4f40b4c3b8ee45caecd080cd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 187622790284522476, guid: 57ad314a4f40b4c3b8ee45caecd080cd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 267929241}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57ad314a4f40b4c3b8ee45caecd080cd, type: 3}
 --- !u!4 &1534144893 stripped
 Transform:

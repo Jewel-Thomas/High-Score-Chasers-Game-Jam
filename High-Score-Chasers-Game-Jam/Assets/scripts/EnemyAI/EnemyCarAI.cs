@@ -173,12 +173,20 @@ public class EnemyCarAI : MonoBehaviour
         if (!detectedTarget) return;
         Vector3 enemyToTargetDirection = (detectedTarget.position - transform.position).normalized;
 
-        for(int i = 0; i < directionCount; i++)
+        for (int i = 0; i < directionCount; i++)
         {
-            // Convert Local raydirection to world space direction
             Vector3 worldSpaceRayDirection = transform.TransformDirection(rayDirections[i]);
-            float targetDot = Vector3.Dot(worldSpaceRayDirection, enemyToTargetDirection);
 
+            // Raycast check: Is this ray blocked by a danger/building before reaching the target?
+            Vector3 rayOrigin = transform.position + Vector3.up * 0.5f;
+            if (Physics.Raycast(rayOrigin, worldSpaceRayDirection, dangerRayDistance, dangerLayer))
+            {
+                // Ray hits a wall -> Kill interest for this direction
+                interestWeights[i] = 0f;
+                continue;
+            }
+
+            float targetDot = Vector3.Dot(worldSpaceRayDirection, enemyToTargetDirection);
             interestWeights[i] = Mathf.Max(0, targetDot);
         }
     }
@@ -209,30 +217,29 @@ public class EnemyCarAI : MonoBehaviour
         if (!detectedTarget) return Vector3.zero;
 
         Vector3 outputDirection = Vector3.zero;
-
-        for(int i = 0; i < directionCount; i++)
-        {
-            Vector3 worldSpaceRayDirection = transform.TransformDirection(rayDirections[i]);
-            float resultantWeight = Mathf.Max(0, interestWeights[i] - dangerWeights[i]);
-            outputDirection += worldSpaceRayDirection * resultantWeight;
-        }
-
-        return outputDirection.normalized;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = gizmoColor;
-
-        if (rayDirections == null || rayDirections.Length != directionCount)
-        {
-            return;
-        }
+        int bestClearIndex = -1;
+        float lowestDanger = Mathf.Infinity;
 
         for (int i = 0; i < directionCount; i++)
         {
             Vector3 worldSpaceRayDirection = transform.TransformDirection(rayDirections[i]);
-            Gizmos.DrawRay(transform.position + Vector3.up * 1.1f, worldSpaceRayDirection * gizmoScale);
+            float resultantWeight = Mathf.Max(0, interestWeights[i] - dangerWeights[i]);
+            outputDirection += worldSpaceRayDirection * resultantWeight;
+
+            // Track the safest open direction as a fallback
+            if (dangerWeights[i] < lowestDanger)
+            {
+                lowestDanger = dangerWeights[i];
+                bestClearIndex = i;
+            }
         }
+
+        // If all direct interest directions are blocked by walls, steer toward the clearest open ray
+        if (outputDirection == Vector3.zero && bestClearIndex != -1 && lowestDanger < 1f)
+        {
+            return transform.TransformDirection(rayDirections[bestClearIndex]).normalized;
+        }
+
+        return outputDirection.normalized;
     }
 }

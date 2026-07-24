@@ -23,7 +23,12 @@ public class TireDecouple : MonoBehaviour
         Decouple(isDeCoupled);
     }
 
-    private void Decouple(bool value)
+    public GameObject GetDecoupleTire()
+    {
+        return decoupleTyre.gameObject;
+    }
+
+    public void Decouple(bool value)
     {
         MeshRenderer dcpTyreMesh = decoupleTyre.GetComponent<MeshRenderer>();
         Collider dcpTyreCollider = decoupleTyre.GetComponent<Collider>();
