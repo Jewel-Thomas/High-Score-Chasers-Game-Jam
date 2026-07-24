@@ -26,7 +26,12 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player Hit!");
+            CarHealth health = collision.gameObject.GetComponent<CarHealth>();
+
+            if (health != null)
+            {
+                health.TakeDamage(10);
+            }
 
             // Example:
             // collision.gameObject.GetComponent<CarHealth>()?.TakeDamage(damage);

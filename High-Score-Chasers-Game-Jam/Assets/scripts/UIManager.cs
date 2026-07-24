@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     //The scirpt is for controlling all the UI in the game 
     
     public static UIManager Instance;
+
     public Transform feedParent;
     public GameObject scoreFeedPrefab;
 

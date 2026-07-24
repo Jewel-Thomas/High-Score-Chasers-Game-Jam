@@ -15,6 +15,10 @@ public class CarController : MonoBehaviour
 
     private Rigidbody playerRb;
     [SerializeField] private TextMeshProUGUI speedText;
+    [SerializeField] float CollisionDamageThreshold = 20f;
+    [SerializeField] float CollisionDamageMultiplier = 2f;
+    private CarHealth health;
+
 
     [SerializeField] private WheelColliders wheelColliders;
     [SerializeField] private WheelMeshes wheelMeshes;
@@ -89,6 +93,7 @@ public class CarController : MonoBehaviour
     {
         Application.targetFrameRate = 144;
         playerRb = GetComponent<Rigidbody>();
+        health = GetComponent<CarHealth>();
 
         rearWheels = new WheelCollider[]
         {
@@ -150,6 +155,28 @@ public class CarController : MonoBehaviour
         //CheckWheelSkid();
         UpdateAllWheels();
     }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Prop"))
+        {
+            return;
+        }
+  
+        float impactSpeed = collision.relativeVelocity.magnitude;
+
+        if (impactSpeed < CollisionDamageThreshold)
+        {
+            return;
+        }
+            
+        float damage = (impactSpeed - CollisionDamageThreshold) * CollisionDamageMultiplier;
+        Debug.Log("collsion damage: " + damage);
+        health.TakeDamage(damage);
+
+    }
+
 
     public void GetInput(float _gasInput = 0f, float _steeringInput = 0f)
     {
