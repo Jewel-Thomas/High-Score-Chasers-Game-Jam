@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -13,6 +13,9 @@ public class UIManager : MonoBehaviour
     public GameObject scoreFeedPrefab;
 
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private GameObject gamePlayUIObject;
+    [SerializeField] private GameObject gameOverUIObject;
 
     private List<GameObject> activeEntries = new List<GameObject>();
 
@@ -20,7 +23,19 @@ public class UIManager : MonoBehaviour
         
     private void Awake()
     {
+        if (Instance && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        SetGameOverUI(false);
     }
 
     public void UpdateScore(int score)
@@ -50,5 +65,17 @@ public class UIManager : MonoBehaviour
 
             activeEntries.RemoveAt(0);
         }
+    }
+
+    public void UpdateHealthSlider(float currentHealth, float maxHealth = 0)
+    {
+        if (maxHealth > 0) healthSlider.maxValue = maxHealth;
+        healthSlider.value = currentHealth;
+    }
+
+    public void SetGameOverUI(bool isGameOver)
+    {
+        gamePlayUIObject.SetActive(!isGameOver);
+        gameOverUIObject.SetActive(isGameOver);
     }
 }

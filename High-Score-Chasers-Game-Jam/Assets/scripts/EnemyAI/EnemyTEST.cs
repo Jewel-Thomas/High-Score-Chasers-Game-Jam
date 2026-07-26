@@ -123,19 +123,21 @@ public class EnemyTEST : MonoBehaviour
 
     IEnumerator AIThink()
     {
-        while(true)
+        while (GameManager.Instance.CurrentGameState == GameManager.GameState.GAME_RUNNING)
         {
             RunStateMachine();
-
             yield return new WaitForSeconds(0.2f);
         }
+
+        PlayerLost();
     }
     
     public void PlayerDetected()
     {
-        if(AICoroutine == null)
+        if(AICoroutine == null && GameManager.Instance.CurrentGameState == GameManager.GameState.GAME_RUNNING)
         {
             AICoroutine = StartCoroutine(AIThink());
+            return;
         }
     }
 

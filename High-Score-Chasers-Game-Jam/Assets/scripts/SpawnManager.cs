@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnObject(GameObject spawnObject, Vector3 spawnPosition, float maxSpawnCount)
     {
-        if (maxSpawnCount <= 0) return;
+        if (GameManager.Instance.CurrentGameState == GameManager.GameState.GAME_OVER || maxSpawnCount <= 0) return;
         Instantiate(spawnObject, spawnPosition, Quaternion.identity);
     }
 }

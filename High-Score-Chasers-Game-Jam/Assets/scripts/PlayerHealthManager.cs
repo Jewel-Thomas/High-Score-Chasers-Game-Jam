@@ -12,7 +12,7 @@ public class PlayerHealthManager : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        healthBar.maxValue = maxHealth;
+        UIManager.Instance.UpdateHealthSlider(currentHealth, maxHealth);
     }
 
     public float GetHealth()
@@ -31,12 +31,13 @@ public class PlayerHealthManager : MonoBehaviour
         float damage = Mathf.Abs(relativeSpeed);
 
         currentHealth -= damage;
-        healthBar.value = currentHealth;
+        UIManager.Instance.UpdateHealthSlider(currentHealth);
 
         if (currentHealth <= 0)
         {
             // Car totaled logic
             TotallCar();
+            GameManager.Instance.SetGameOver();
         }
     }
 
