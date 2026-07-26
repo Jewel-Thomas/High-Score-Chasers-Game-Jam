@@ -13,7 +13,6 @@ public class TireDecouple : MonoBehaviour
 
     private void Start()
     {
-        GameInput.Instance.OnMisc += GameInput_OnMisc;
     }
 
     private void GameInput_OnMisc(object sender, System.EventArgs e)

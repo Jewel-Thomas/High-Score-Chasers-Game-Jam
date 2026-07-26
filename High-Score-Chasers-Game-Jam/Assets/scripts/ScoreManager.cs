@@ -2,22 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 
 public class ScoreManager : MonoBehaviour
 {
     //This handles scores that are then passed on to the UI manager
     public static ScoreManager Instance;
-    [SerializeField] private int requiredScore = 500;
-    [SerializeField] private TMP_Text TargetText;
+    //[SerializeField] private int requiredScore = 500;
+    
     public int TotalScore { get; private set; }
-
+    public event Action<int> OnScoreChanged;
     private List<ScoreEvent> recentEvents = new List<ScoreEvent>();
 
     private void Awake()
     {
-        Instance = this;
-        TargetText.text = $"Target Score: {requiredScore}";
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
         
     }
 
@@ -54,11 +63,8 @@ public class ScoreManager : MonoBehaviour
 
         UIManager.Instance.UpdateScore(TotalScore);
         UIManager.Instance.AddScoreFeed(newEvent);
-        Debug.Log("score added");
-        if(TotalScore >= requiredScore)
-        {
-            Debug.Log("Level Complete!");
-        }
+        
+        OnScoreChanged?.Invoke(TotalScore);
     }
 
 

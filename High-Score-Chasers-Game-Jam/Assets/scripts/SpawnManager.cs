@@ -16,8 +16,9 @@ public class SpawnManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void SpawnObject(GameObject spawnObject, Vector3 spawnPosition)
+    public void SpawnObject(GameObject spawnObject, Vector3 spawnPosition, float maxSpawnCount)
     {
+        if (maxSpawnCount <= 0) return;
         Instantiate(spawnObject, spawnPosition, Quaternion.identity);
     }
 }

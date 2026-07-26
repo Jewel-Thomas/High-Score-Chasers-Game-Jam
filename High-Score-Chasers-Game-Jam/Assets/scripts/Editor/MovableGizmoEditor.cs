@@ -41,10 +41,6 @@ public class MovableGizmoEditor : Editor
                 // Draw connecting line in 3D scene space
                 Handles.DrawLine(startWorld, endWorld, 2.0f);
             }
-
-            Vector3 start = demo.transform.TransformPoint(demo.gizmoLocalPositions[demo.gizmoLocalPositions.Count - 1]);
-            Vector3 end = demo.transform.TransformPoint(demo.gizmoLocalPositions[0]);
-            Handles.DrawLine(start, end, 2.0f);
         }
 
         Handles.color = Color.cyan; // Sphere color
