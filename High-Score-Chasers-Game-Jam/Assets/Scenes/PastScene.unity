@@ -16491,7 +16491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77719857d267b664bba9d307bd3980f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: FutureScene
+  nextScene: 2
 --- !u!212 &1009350557
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -35087,6 +35087,26 @@ PrefabInstance:
     - target: {fileID: 2764371685672022497, guid: d6aa8b04da1724ca59f703adb2462cbe, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852269654996938860, guid: d6aa8b04da1724ca59f703adb2462cbe, type: 3}
+      propertyPath: m_fontColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852269654996938860, guid: d6aa8b04da1724ca59f703adb2462cbe, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852269654996938860, guid: d6aa8b04da1724ca59f703adb2462cbe, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852269654996938860, guid: d6aa8b04da1724ca59f703adb2462cbe, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852269654996938860, guid: d6aa8b04da1724ca59f703adb2462cbe, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3578211228263084069, guid: d6aa8b04da1724ca59f703adb2462cbe, type: 3}
       propertyPath: m_AnchorMax.y
