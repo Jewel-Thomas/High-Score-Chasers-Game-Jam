@@ -14,6 +14,8 @@ public class SpawnArea : MonoBehaviour
 
     [Header("Spawn Setting")]
     [SerializeField] private GameObject spawnObject;
+    [SerializeField] private float spawnRate = 5f;
+    [SerializeField] private float maxSpawnCount = 10f;
 
     // Area Settings
     private Vector3[] verts;
@@ -30,7 +32,7 @@ public class SpawnArea : MonoBehaviour
     private void Start()
     {
         InitializeSpawnArea();
-        InvokeRepeating(nameof(SpawnObject), 3f, 5f);
+        InvokeRepeating(nameof(SpawnObject), 3f, spawnRate);
     }
 
     private void InitializeSpawnArea()
@@ -97,7 +99,8 @@ public class SpawnArea : MonoBehaviour
     private void SpawnObject()
     {
         Vector3 spawnPosition = GenerateRandomPointInArea();
-        SpawnManager.Instance.SpawnObject(spawnObject, spawnPosition);
+        SpawnManager.Instance.SpawnObject(spawnObject, spawnPosition, maxSpawnCount);
+        maxSpawnCount--;
     }
 
     private Vector3[] ChooseSpawnTriangle(float totalArea, float[] prefixSumAreas, Vector3[] verts, int[] triangleIndices)
