@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -26,15 +24,12 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            CarHealth health = collision.gameObject.GetComponent<CarHealth>();
+            PlayerHealthManager playerHealthManager = collision.gameObject.GetComponent<PlayerHealthManager>();
 
-            if (health != null)
+            if (playerHealthManager != null)
             {
-                health.TakeDamage(10);
+                playerHealthManager.TakeDamage(damage);
             }
-
-            // Example:
-            // collision.gameObject.GetComponent<CarHealth>()?.TakeDamage(damage);
         }
 
         Destroy(gameObject);
