@@ -78,6 +78,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedText: {fileID: 0}
+  CollisionDamageThreshold: 20
+  CollisionDamageMultiplier: 2
   wheelColliders:
     frontLeftWheelCollider: {fileID: 9063703963984125958}
     frontRightWheelCollider: {fileID: 5644811150909183670}
@@ -219,12 +221,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d7c37677e0b84de091f79e5e4514f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  maxHealth: 100
   decoupleTireObjects:
   - {fileID: 6487483886502502289}
   - {fileID: 7419690991544879984}
   - {fileID: 8585773998105436061}
   - {fileID: 2240953274372174874}
+  healthBar: {fileID: 0}
 --- !u!1 &355127245579265184
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,7 +876,7 @@ GameObject:
   - component: {fileID: 9192302047577653852}
   m_Layer: 7
   m_Name: body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
