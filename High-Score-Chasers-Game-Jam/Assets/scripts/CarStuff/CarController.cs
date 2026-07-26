@@ -155,7 +155,12 @@ public class CarController : MonoBehaviour
 
     public void GetInput(float _gasInput = 0f, float _steeringInput = 0f)
     {
-        if (GameManager.Instance.CurrentGameState == GameManager.GameState.GAME_OVER) return;
+        if (GameManager.Instance.CurrentGameState == GameManager.GameState.GAME_OVER)
+        {
+            gasInput = 0;
+            steeringInput = 0;
+            return;
+        }
 
         switch (drivator)
         {
