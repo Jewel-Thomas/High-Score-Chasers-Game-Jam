@@ -1,10 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
-    [SerializeField] private AudioClip bgmAudioClip;
+    [SerializeField] private AudioClip[] bgmPlayListClips;
     private AudioSource audioSource;
 
     private void Awake()
@@ -23,13 +24,27 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PlayBGMAudio(bgmAudioClip);
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
+        StartCoroutine(PlayBGMPlayList());
     }
 
-    public void PlayBGMAudio(AudioClip bgmAudioClip)
+    public IEnumerator PlayBGMPlayList()
     {
-        audioSource.clip = bgmAudioClip;
-        audioSource.loop = true;
-        audioSource.Play();
+        int playListLength = bgmPlayListClips.Length;
+        for (int i = 0; ; i = (i + 1) % playListLength)
+        {
+            audioSource.clip = bgmPlayListClips[i];
+            audioSource.Play();
+            yield return new WaitWhile(() => audioSource.isPlaying);
+        }
     }
+
+
+
+    public void PlayAudio(AudioSource audioSource, AudioClip audioClip)
+    {
+        audioSource.PlayOneShot(audioClip);    
+    }
+
 }

@@ -3338,6 +3338,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -942704859060236666, guid: 6888f67feaf0cc64da202198db8762a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9848078
+      objectReference: {fileID: 0}
+    - target: {fileID: -942704859060236666, guid: 6888f67feaf0cc64da202198db8762a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -942704859060236666, guid: 6888f67feaf0cc64da202198db8762a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.17364816
+      objectReference: {fileID: 0}
+    - target: {fileID: -942704859060236666, guid: 6888f67feaf0cc64da202198db8762a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -942704859060236666, guid: 6888f67feaf0cc64da202198db8762a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6888f67feaf0cc64da202198db8762a0, type: 3}
       propertyPath: m_Name
       value: CAR_DMC12_MODEL
@@ -3348,7 +3368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5822892737295338201, guid: 6888f67feaf0cc64da202198db8762a0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.988108
+      value: 0.9848078
       objectReference: {fileID: 0}
     - target: {fileID: 5822892737295338201, guid: 6888f67feaf0cc64da202198db8762a0, type: 3}
       propertyPath: m_LocalRotation.x
@@ -3356,7 +3376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5822892737295338201, guid: 6888f67feaf0cc64da202198db8762a0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.15376198
+      value: 0.17364816
       objectReference: {fileID: 0}
     - target: {fileID: 5822892737295338201, guid: 6888f67feaf0cc64da202198db8762a0, type: 3}
       propertyPath: m_LocalRotation.z
@@ -3364,7 +3384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5822892737295338201, guid: 6888f67feaf0cc64da202198db8762a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 17.69
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7777,6 +7797,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2789927139503120304, guid: 482f0763c39674c2f8eb17fd2f613c01, type: 3}
+      propertyPath: bgmPlayListClips.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789927139503120304, guid: 482f0763c39674c2f8eb17fd2f613c01, type: 3}
+      propertyPath: bgmPlayListClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f09bb6db6339544f7bfdff6eaed0090e, type: 3}
+    - target: {fileID: 2789927139503120304, guid: 482f0763c39674c2f8eb17fd2f613c01, type: 3}
+      propertyPath: bgmPlayListClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: a6cbc10539181814d808a6360e6974e3, type: 3}
+    - target: {fileID: 2789927139503120304, guid: 482f0763c39674c2f8eb17fd2f613c01, type: 3}
+      propertyPath: bgmPlayListClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 57b0a062276d44c0f8895e7fdbd15224, type: 3}
+    - target: {fileID: 2789927139503120304, guid: 482f0763c39674c2f8eb17fd2f613c01, type: 3}
+      propertyPath: bgmPlayListClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c882287d249d409db7d2a9c4e3da6ec, type: 3}
     - target: {fileID: 6705277296451342509, guid: 482f0763c39674c2f8eb17fd2f613c01, type: 3}
       propertyPath: m_Name
       value: AudioManager
